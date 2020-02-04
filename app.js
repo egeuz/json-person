@@ -1,20 +1,41 @@
+const title = document.getElementById("title");
 const text = document.getElementById("text");
+const back = document.getElementById("back");
 
-window.addEventListener("DOMContentLoaded", () => { renderData(json.ege) });
+const history = ["ege"];
 
-function renderData(data) {
-  text.innerHTML = parseLinks(data);
+const renderData = () => {
+  let key = history[history.length - 1];
+  let content = json[key];
+  console.log(text);
+
+  title.innerHTML = key.replace(key[0], key[0].toUpperCase());
+  text.innerHTML = parseLinks(content);
+
   document.querySelectorAll(".link").forEach(link => {
-    link.addEventListener("click", () => {
+    link.addEventListener("click", (event) => {
       const key = event.target.innerHTML.toLowerCase().replace(/[^\w\s]|_/g, "");
-      renderData(json[key]);
-    })
+      history.push(key);
+      renderData();
+    });
   });
 }
 
-function parseLinks(text) {
-  return text.split(" ").map(word => {
-    const key = word.toLowerCase().replace(/[^\w\s]|_/g, "");
-    return (json[key]) ? `<a class="link">${word}</a>` : word;
-  }).join(" ");
-}
+const parseLinks = (text) => text.split(" ").map(word => {
+  const key = word.toLowerCase().replace(/[^\w\s]|_/g, "");
+  return (json[key]) ? `<a class="link">${word}</a>` : word;
+}).join(" ");
+
+window.addEventListener("DOMContentLoaded", () => {
+  back.disabled = history.length <= 1;
+  renderData();
+});
+
+back.addEventListener("click", () => {
+  history.pop();
+  renderData();
+});
+
+document.addEventListener("click", () => {
+  back.disabled = history.length <= 1;
+})

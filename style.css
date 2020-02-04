@@ -4,14 +4,51 @@ body {
   font-size: 1.25rem;
 }
 
-#text {
+#content {
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
+  min-height: 400px;
   margin: 100px auto; 
+  display: grid;
+  grid-template-columns: auto 100px;
+  grid-template-rows: 50px auto;
+  grid-gap: 10px 0;
+}
+
+#title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+#text {
+  grid-column: 1 / span 2;
 }
 
 .link {
   text-decoration: underline;
   font-weight: 600;
   cursor: pointer;
+}
+
+#back {
+  font-family: monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  background: none;
+  border: 3px solid #111;
+  color: #111;
+  cursor: pointer;
+}
+
+#back:hover {
+  background: #111;
+  color: #fff;
+}
+
+#back:disabled {
+  color: #999;
+  border-color: #999;
+  background: none;
+  cursor: default;
 }

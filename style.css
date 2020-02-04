@@ -1,0 +1,17 @@
+body {
+  color: #111;
+  font-family: monospace;
+  font-size: 1.25rem;
+}
+
+#text {
+  width: 100%;
+  max-width: 800px;
+  margin: 100px auto; 
+}
+
+.link {
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+}
